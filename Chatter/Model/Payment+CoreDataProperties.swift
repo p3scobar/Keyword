@@ -16,7 +16,7 @@ extension Payment {
         return NSFetchRequest<Payment>(entityName: "Payment")
     }
 
-    @NSManaged public var timestamp: NSDate?
+    @NSManaged public var timestamp: Date?
     @NSManaged public var amount: String?
     @NSManaged public var from: String?
     @NSManaged public var fromImage: String?
@@ -27,5 +27,6 @@ extension Payment {
     @NSManaged public var toImage: String?
     @NSManaged public var toName: String?
     @NSManaged public var toUsername: String?
+    @NSManaged public var isReceived: Bool
 
 }

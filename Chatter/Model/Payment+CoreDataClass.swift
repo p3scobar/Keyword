@@ -44,30 +44,41 @@ public class Payment: NSManagedObject {
         payment.toUsername = data["toUsername"] as? String
         payment.amount = data["amount"] as? String ?? "0.000"
         let rawDate = data["timestamp"] as? Int ?? 0
-        if let double = Double(exactly: rawDate) {
-            let date = NSDate(timeIntervalSince1970: double)
+        if let double = Double(exactly: rawDate/1000) {
+            let date = Date(timeIntervalSince1970: double)
             payment.timestamp = date
         }
+        payment.isReceived = Model.shared.uuid == payment.to
         return payment
     }
+    
+}
+
+
+extension Payment {
     
     func fetchOtherName() -> String {
         let pk = KeychainHelper.publicKey
         guard let from = from,
-        let fromName = fromName,
-        let toName = toName else { return "" }
+            let fromName = fromName,
+            let toName = toName else { return "" }
         return from != pk ? fromName : toName
+    }
+    
+    
+    func fetchOtherUsername() -> String {
+        let pk = KeychainHelper.publicKey
+        guard let from = from,
+            let fromUsername = fromUsername,
+            let toUsername = toUsername else { return "" }
+        return from != pk ? fromUsername : toUsername
     }
     
     func fetchOtherImage() -> String {
         let pk = KeychainHelper.publicKey
-        guard let from = from,
-            let fromImage = fromImage,
-            let toImage = toImage else { return "" }
-        return from != pk ? fromImage : toImage
+        let fromImageUrl = fromImage ?? ""
+        let toImageUrl = toImage ?? ""
+        return from != pk ? fromImageUrl : toImageUrl
     }
-    
-
-
     
 }

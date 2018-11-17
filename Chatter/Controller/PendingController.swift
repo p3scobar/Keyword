@@ -11,17 +11,16 @@ import UIKit
 //import MaterialActivityIndicator
 
 class PendingController: UIViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Theme.tintColor
+        view.backgroundColor = Theme.darkBackground
         setupView()
     }
     
     let indicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.tintColor = Theme.white
+        view.color = Theme.lightGray
         return view
     }()
     

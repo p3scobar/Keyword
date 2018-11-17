@@ -26,12 +26,15 @@ class AccountHeader: UIView {
         setupView()
         tap = UITapGestureRecognizer(target: self, action: #selector(editProfilePic))
         profileImage.addGestureRecognizer(tap)
+        setupNameAndProfileImage()
+    }
+    
+    func setupNameAndProfileImage() {
         nameLabel.text = Model.shared.name
         usernameLabel.text = "@\(Model.shared.username)"
         let url = URL(string: Model.shared.profileImage)
         profileImage.kf.setImage(with: url)
     }
-    
     
     @objc func editProfilePic() {
         delegate?.handleEditProfilePic()

@@ -55,21 +55,24 @@ class UserHeader: UIView {
             if let bio = user?.bio {
                 bioLabel.text = bio
             }
-            if let uid = user?.id {
-                if uid == Model.shared.uuid {
-                    followButton.isEnabled = false
-                    payButton.isEnabled = false
-                } else {
-                    followButton.isEnabled = true
-                    payButton.isEnabled = true
-                }
-            }
             if user?.publicKey != nil {
                 payButton.isEnabled = true
             } else {
                 payButton.isEnabled = false
             }
+            if isCurrentUser {
+                followButton.isEnabled = false
+                payButton.isEnabled = false
+            } else {
+                followButton.isEnabled = true
+                payButton.isEnabled = true
+            }
         }
+    }
+    
+    var isCurrentUser: Bool {
+        guard let uid = user?.id else { return false }
+        return uid == Model.shared.uuid
     }
     
     lazy var profileImageView: UIImageView = {

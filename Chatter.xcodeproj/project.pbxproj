@@ -31,6 +31,7 @@
 		CE218CF32118C63400AD1EF2 /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE218CF22118C63400AD1EF2 /* NotificationsController.swift */; };
 		CE218CFB211BCF8400AD1EF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE218CFA211BCF8400AD1EF2 /* GoogleService-Info.plist */; };
 		CE218CFD211BDC4B00AD1EF2 /* UsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE218CFC211BDC4B00AD1EF2 /* UsersController.swift */; };
+		CE2E61A4219FA0E200BF46B8 /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E61A3219FA0E200BF46B8 /* DrawerController.swift */; };
 		CE72D63C213F4250000A5397 /* WalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72D63B213F4250000A5397 /* WalletController.swift */; };
 		CE72D63E213F426A000A5397 /* WalletHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72D63D213F426A000A5397 /* WalletHeader.swift */; };
 		CE72D640213F4677000A5397 /* WalletService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72D63F213F4677000A5397 /* WalletService.swift */; };
@@ -114,6 +115,7 @@
 		CE218CF22118C63400AD1EF2 /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
 		CE218CFA211BCF8400AD1EF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE218CFC211BDC4B00AD1EF2 /* UsersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersController.swift; sourceTree = "<group>"; };
+		CE2E61A3219FA0E200BF46B8 /* DrawerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
 		CE72D63B213F4250000A5397 /* WalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletController.swift; sourceTree = "<group>"; };
 		CE72D63D213F426A000A5397 /* WalletHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeader.swift; sourceTree = "<group>"; };
 		CE72D63F213F4677000A5397 /* WalletService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletService.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				CE72D64D213F4D68000A5397 /* RecoveryController.swift */,
 				CE72D653213F530B000A5397 /* PendingController.swift */,
 				CEB1ED392150596B00B49064 /* CoreDataTableViewController.swift */,
+				CE2E61A3219FA0E200BF46B8 /* DrawerController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 				CE72D654213F530B000A5397 /* PendingController.swift in Sources */,
 				CE961F02210D752C00025D0D /* ComposeToolbar.swift in Sources */,
 				CE961EFA210D6C0900025D0D /* AccountController.swift in Sources */,
+				CE2E61A4219FA0E200BF46B8 /* DrawerController.swift in Sources */,
 				CE218CE521181BAE00AD1EF2 /* Tools.swift in Sources */,
 				CECC040321176F2500AD8390 /* ActivityService.swift in Sources */,
 				CE961EFC210D6C8A00025D0D /* AccountHeader.swift in Sources */,

@@ -84,7 +84,6 @@ class UserController: UITableViewController, UserHeaderDelegate, StatusCellDeleg
         let plus = UIBarButtonItem(image: plusIcon, style: .done, target: self, action: #selector(handleCompose))
         navigationItem.rightBarButtonItem = plus
         plus.tintColor = Theme.white
-//        edgesForExtendedLayout = UIRectEdge.all
         extendedLayoutIncludesOpaqueBars = true
         
         spinner = UIActivityIndicatorView(activityIndicatorStyle: .white)
@@ -92,6 +91,7 @@ class UserController: UITableViewController, UserHeaderDelegate, StatusCellDeleg
         spinner.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 80)
         spinner.tintColor = Theme.lightGray
         tableView.tableFooterView = spinner
+        spinner.startAnimating()
     }
     
     @objc func handleCompose() {
@@ -112,6 +112,7 @@ class UserController: UITableViewController, UserHeaderDelegate, StatusCellDeleg
         guard let uuid = user?.id else { return }
         NewsService.fetchPosts(cursor: 0, forUser: uuid) { [weak self] (feed) in
             self?.timeline = feed
+            self?.spinner.stopAnimating()
         }
     }
 

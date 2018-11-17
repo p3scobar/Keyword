@@ -18,7 +18,7 @@ class InputTextViewCell: UITableViewCell, UITextViewDelegate {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
         textView.delegate = self
-        backgroundColor = .white
+        backgroundColor = Theme.cellBackground
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -30,7 +30,7 @@ class InputTextViewCell: UITableViewCell, UITextViewDelegate {
         let view = UITextView()
         view.font = Theme.medium(18)
         view.placeholderColor = Theme.gray
-        view.backgroundColor = .white
+        view.textColor = Theme.white
         view.contentInset = UIEdgeInsetsMake(8, 0, 0, 0)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

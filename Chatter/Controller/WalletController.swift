@@ -153,10 +153,7 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let payment = payments[indexPath.row]
-        presentReceiptController()
-//                let vc = TransactionController(payment: payment)
-//                self.navigationController?.pushViewController(vc, animated: true)
+        presentReceiptController(payments[indexPath.row])
     }
     
     
@@ -170,12 +167,13 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
         }
     }
     
-    func presentReceiptController() {
+    func presentReceiptController(_ payment: Payment) {
         definesPresentationContext = true
-//        let vc = ReceiptController()
-//        vc.modalTransitionStyle = .crossDissolve
-//        vc.modalPresentationStyle = .overCurrentContext
-//        self.tabBarController?.present(vc, animated: true, completion: nil)
+        let vc = DrawerController(payment: payment)
+        vc.payment = payment
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overCurrentContext
+        self.tabBarController?.present(vc, animated: true, completion: nil)
     }
     
     func presentQRController() {

@@ -29,17 +29,17 @@ class RecoveryController: UITableViewController, InputTextCellDelegate {
     }
     
     @objc func handleSubmit() {
-//        WalletManager.generateKeyPair(mnemonic: mnemonic) { (keyPair) in
-//            let publicKey = keyPair.accountId
-//            guard let privateSeed = keyPair.secretSeed else { return }
-//            
-//            print("PUBLIC KEY: \(publicKey)")
-//            print("PRIVATE KEY: \(privateSeed)")
-//            
-//            KeychainHelper.publicKey = publicKey
-//            KeychainHelper.privateSeed = privateSeed
-//            self.dismiss(animated: true, completion: nil)
-//        }
+        WalletService.generateKeyPair(mnemonic: mnemonic) { (keyPair) in
+            let publicKey = keyPair.accountId
+            guard let privateSeed = keyPair.secretSeed else { return }
+            
+            print("PUBLIC KEY: \(publicKey)")
+            print("PRIVATE KEY: \(privateSeed)")
+            
+            KeychainHelper.publicKey = publicKey
+            KeychainHelper.privateSeed = privateSeed
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     

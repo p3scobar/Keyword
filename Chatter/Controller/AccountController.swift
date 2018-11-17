@@ -34,13 +34,11 @@ class AccountController: UITableViewController, MFMailComposeViewControllerDeleg
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(pushProfile))
         header.addGestureRecognizer(tap)
-        
-        header.nameLabel.text = Model.shared.name
+        extendedLayoutIncludesOpaqueBars = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        header.nameLabel.text = Model.shared.name
-        header.usernameLabel.text = "@\(Model.shared.username)"
+        header.setupNameAndProfileImage()
     }
     
     func photoPermission() -> Bool {

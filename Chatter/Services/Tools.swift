@@ -232,3 +232,18 @@ extension String {
     }
 }
 
+
+
+extension Date {
+    
+    func asString() -> String {
+        let formatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            formatter.timeStyle = .short
+            return formatter
+        }()
+        return formatter.string(from: self)
+    }
+    
+}

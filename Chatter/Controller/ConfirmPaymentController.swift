@@ -46,7 +46,7 @@ class ConfirmPaymentController: UITableViewController {
         let button = UIButton(frame: CGRect(x: 16, y: 10, width: self.view.frame.width-32, height: 60))
         button.setTitle("Confirm", for: .normal)
         button.setTitleColor(Theme.darkBackground, for: .normal)
-        button.titleLabel?.font = Theme.semibold(24)
+        button.titleLabel?.font = Theme.semibold(18)
         button.layer.cornerRadius = 8
         button.clipsToBounds = true
         button.backgroundColor = Theme.white
