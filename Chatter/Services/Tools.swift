@@ -165,7 +165,7 @@ extension Status {
     }
 }
 
-extension NSDate {
+extension Date {
     func formatted() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, h:mm a"

@@ -27,7 +27,7 @@ extension Status {
     @NSManaged public var linkImage: String?
     @NSManaged public var linkTitle: String?
     
-    @NSManaged public var timestamp: NSDate?
+    @NSManaged public var timestamp: Date
     @NSManaged public var likeCount: Int16
     @NSManaged public var commentCount: Int16
 

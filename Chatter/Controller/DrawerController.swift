@@ -26,7 +26,7 @@ class DrawerController: UIViewController {
 
             profileImageView.kf.setImage(with: url)
             
-            let formattedDate = payment!.timestamp?.asString() ?? ""
+            let formattedDate = payment!.timestamp.asString()
             
             if payment!.isReceived {
                 subtitleLabel.text = "You received \(amount) from @\(payment!.fetchOtherUsername()) on \(formattedDate)"

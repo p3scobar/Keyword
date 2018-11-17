@@ -43,16 +43,25 @@ struct NewsService {
         }
     }
     
+    static func fetchSavedTimeline(completion: @escaping ([Status]) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            var feed = Status.fetchAll(in: PersistenceService.context)
+            feed.sort { (s0, s1) -> Bool in
+                s0.timestamp > s1.timestamp
+            }
+            completion(feed)
+        }
+    }
+    
     static func fetchTimeline(cursor: Int, completion: @escaping ([Status]) -> Void) {
         DispatchQueue.global(qos: .background).async {
             let urlString = "\(baseUrl)/timeline"
             let url = URL(string: urlString)!
-            let token = Model.shared.token
-            print("Token: \(token)")
-            let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
+            let headers: HTTPHeaders = ["Authorization": "Bearer \(Model.shared.token)"]
             let params: [String:Any] = ["cursor":cursor]
+            var feed: [Status] = []
+            feed = Status.fetchAll(in: PersistenceService.context)
             Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
-                var feed = [Status]()
                 guard let json = response.result.value as? [String:Any],
                     let resp = json["response"] as? [String:Any],
                     let results = resp["posts"] as? [[String:Any]] else { return
@@ -61,7 +70,35 @@ struct NewsService {
                 results.forEach({ (result) in
                     let id = result["_id"] as? String ?? ""
                     let status = Status.findOrCreateStatus(id: id, data: result, in: PersistenceService.context)
-                    feed.append(status)
+                    if !feed.contains(status) {
+                        feed.append(status)
+                    }
+                })
+                let sorted = feed.sorted(by: { (s0, s1) -> Bool in
+                    s0.timestamp > s1.timestamp
+                })
+                completion(sorted)
+            }
+        }
+    }
+    
+    static func fetchMorePosts(cursor: Int, completion: @escaping ([Status]) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            let urlString = "\(baseUrl)/timeline"
+            let url = URL(string: urlString)!
+            let headers: HTTPHeaders = ["Authorization": "Bearer \(Model.shared.token)"]
+            let params: [String:Any] = ["cursor":cursor]
+            var feed: [Status] = []
+            Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
+                guard let json = response.result.value as? [String:Any],
+                    let resp = json["response"] as? [String:Any],
+                    let results = resp["posts"] as? [[String:Any]] else { return
+                        completion([])
+                }
+                results.forEach({ (result) in
+                    let id = result["_id"] as? String ?? ""
+                    let status = Status.findOrCreateStatus(id: id, data: result, in: PersistenceService.context)
+                        feed.append(status)
                 })
                 completion(feed)
             }

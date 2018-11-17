@@ -134,25 +134,47 @@ struct WalletService {
     }
     
     
-    static func fetchTransactions(completion: @escaping ([Payment]) -> Void) {
+    static func fetchSavedPayments(completion: @escaping ([Payment]?) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            var feed = Payment.fetchAll(in: PersistenceService.context)
+            feed.sort { (s0, s1) -> Bool in
+                s0.timestamp > s1.timestamp
+            }
+            if feed.count > 0 {
+                completion(feed)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    
+    static func fetchTransactions(completion: @escaping ([Payment]?) -> Void) {
         DispatchQueue.global(qos: .background).async {
             let urlString = "\(baseUrl)/payments"
             let url = URL(string: urlString)!
             let token = Model.shared.token
             let headers: HTTPHeaders = ["Authorization":"Bearer \(token)"]
-            let params: Parameters = [:]
-            Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
-                
-                var payments = [Payment]()
+            var payments = [Payment]()
+            payments = Payment.fetchAll(in: PersistenceService.context)
+            Alamofire.request(url, method: .post, parameters: [:], encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
                 guard let json = response.result.value as? [String:Any],
                     let resp = json["response"] as? [String:Any],
-                    let results = resp["payments"] as? [[String:Any]] else { return }
+                    let results = resp["payments"] as? [[String:Any]] else {
+                        completion(nil)
+                        return
+                }
                 results.forEach({ (data) in
                     let id = data["_id"] as? String ?? ""
                     let payment = Payment.findOrCreatePayment(id: id, data: data, in: PersistenceService.context)
-                    payments.append(payment)
+                    if !payments.contains(payment) {
+                        payments.append(payment)
+                    }
                 })
-                completion(payments)
+                let sorted = payments.sorted(by: { (s0, s1) -> Bool in
+                    s0.timestamp > s1.timestamp
+                })
+                completion(sorted)
             }
         }
     }

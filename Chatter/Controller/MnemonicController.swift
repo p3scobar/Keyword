@@ -100,7 +100,7 @@ class MnemonicController: UITableViewController {
                 WalletService.createStellarTestAccount(accountID: publicKey, completion: { (response) in
                     DispatchQueue.main.async {
                         self.dismiss(animated: true, completion: {
-                            self.controller?.loadData()
+                            self.controller?.loadData(nil)
                         })
                     }
                 })

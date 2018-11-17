@@ -60,7 +60,7 @@ public class Status: NSManagedObject {
         status.userImage = data["userImage"] as? String ?? ""
         let rawDate = data["timestamp"] as? Int ?? 0
         if let double = Double(exactly: rawDate/1000) {
-            let date = NSDate(timeIntervalSince1970: double)
+            let date = Date(timeIntervalSince1970: double)
             status.timestamp = date
         }
         status.inReplyToId = data["inReplyToId"] as? String
@@ -81,10 +81,20 @@ public class Status: NSManagedObject {
     }
     
     
+    static func fetchAll(in context: NSManagedObjectContext) -> [Status] {
+        let request: NSFetchRequest<Status> = Status.fetchRequest()
+        var feed: [Status] = []
+        do {
+            feed = try context.fetch(request)
+        } catch {
+            let error = error
+            print(error.localizedDescription)
+        }
+        return feed
+    }
+
+
 }
-
-
-
 
 
 

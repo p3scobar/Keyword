@@ -52,6 +52,19 @@ public class Payment: NSManagedObject {
         return payment
     }
     
+    
+    static func fetchAll(in context: NSManagedObjectContext) -> [Payment] {
+        let request: NSFetchRequest<Payment> = Payment.fetchRequest()
+        var payments: [Payment] = []
+        do {
+            payments = try context.fetch(request)
+        } catch {
+            let error = error
+            print(error.localizedDescription)
+        }
+        return payments
+    }
+    
 }
 
 

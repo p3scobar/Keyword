@@ -15,12 +15,12 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
     var paymentCell = "paymentCell"
     let refresh = UIRefreshControl()
     
-    var payments = [Payment]() {
+    var payments: [Payment]? {
         didSet {
             DispatchQueue.main.async {
+                self.refresh.endRefreshing()
                 self.tableView.reloadData()
                 self.setupEmptyView()
-                self.refreshControl?.endRefreshing()
             }
         }
     }
@@ -34,18 +34,28 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
         super.viewDidLoad()
         header.delegate = self
         tableView.backgroundColor = Theme.darkBackground
-        tableView.refreshControl = refresh
         self.navigationItem.title = "Wallet"
         tableView.showsVerticalScrollIndicator = false
         tableView.tableHeaderView = header
         tableView.tableFooterView = UIView()
         tableView.register(PaymentCell.self, forCellReuseIdentifier: paymentCell)
-        refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        refresh.addTarget(self, action: #selector(loadData(_:)), for: .valueChanged)
         extendedLayoutIncludesOpaqueBars = true
+        tableView.contentInsetAdjustmentBehavior = .automatic
+        tableView.refreshControl = refresh
         checkForPublicKey()
+        WalletService.fetchSavedPayments { (payments) in
+            self.payments = payments
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        refresh.endRefreshing()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         let publicKey = KeychainHelper.publicKey
         let privateSeed = KeychainHelper.privateSeed
         
@@ -55,7 +65,7 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
     
     func checkForPublicKey() {
         if KeychainHelper.publicKey != "" {
-            loadData()
+            loadData(nil)
         } else {
             header.balance = "Create New Wallet"
             header.currencyCodeLabel.text = "Backup Passphrase"
@@ -74,55 +84,47 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
     }()
     
     func setupEmptyView() {
-        if payments.count == 0 {
+        if payments?.count == 0 {
             self.tableView.backgroundView = emptyLabel
         } else {
             self.tableView.backgroundView = nil
         }
     }
     
-    
-    func fetchTransactions() {
-        WalletService.fetchTransactions { (payments) in
-            self.payments = payments
-        }
-    }
+//    func fetchTransactions() {
+//        WalletService.fetchTransactions { (payments) in
+//            self.payments = payments
+//        }
+//    }
     
     func streamTransactions() {
         WalletService.streamPayments { (payment) in
-            self.payments.insert(payment, at: 0)
+            self.payments?.insert(payment, at: 0)
             self.getAccountDetails()
         }
     }
-    
-    @objc func pullToRefresh() {
-        if Model.shared.soundsEnabled {
-            DispatchQueue.main.async {
-                //Sound.play(file: "expand.m4a")
-            }
-        }
-        if KeychainHelper.publicKey != "" {
-            getAccountDetails()
-            fetchTransactions()
-        } else {
-            refreshControl?.endRefreshing()
-        }
-    }
-    
     
     func getAccountDetails() {
         WalletService.getAccountDetails { (balance) in
             DispatchQueue.main.async {
                 self.header.balance = balance
                 self.header.currencyCodeLabel.text = "SGR"
-                self.refreshControl?.endRefreshing()
             }
         }
     }
     
-    @objc func loadData() {
-        getAccountDetails()
-        fetchTransactions()
+    @objc func loadData(_ sender: UIRefreshControl?) {
+        if sender != nil, Model.shared.soundsEnabled {
+            DispatchQueue.main.async {
+                //Sound.play(file: "expand.m4a")
+            }
+        }
+        if KeychainHelper.publicKey != "" {
+            getAccountDetails()
+        }
+        WalletService.fetchTransactions { (payments) in
+            self.payments = payments
+        }
     }
     
     
@@ -132,7 +134,7 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return payments.count
+        return payments?.count ?? 0
     }
     
     
@@ -141,7 +143,7 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
         let background = UIView()
         background.backgroundColor = Theme.darkBackground
         cell.selectedBackgroundView = background
-        cell.payment = payments[indexPath.row]
+        cell.payment = payments?[indexPath.row]
         return cell
     }
     
@@ -153,7 +155,7 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        presentReceiptController(payments[indexPath.row])
+        presentReceiptController(payments![indexPath.row])
     }
     
     

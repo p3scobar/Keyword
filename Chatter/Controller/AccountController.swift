@@ -30,7 +30,7 @@ class AccountController: UITableViewController, MFMailComposeViewControllerDeleg
         tableView.separatorColor = Theme.border
         tableView.tableHeaderView = header
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: standardCell)
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 80))
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(pushProfile))
         header.addGestureRecognizer(tap)

@@ -116,6 +116,9 @@ class TimelineController: CoreDataTableViewController, UISearchControllerDelegat
 
     @objc func fetchData() {
         allPostsLoaded = false
+        NewsService.fetchSavedTimeline { [weak self] (posts) in
+            self?.timeline = posts
+        }
         NewsService.fetchTimeline(cursor: 0) { [weak self] (feed) in
             self?.timeline = feed
             self?.printStats()
@@ -165,7 +168,7 @@ class TimelineController: CoreDataTableViewController, UISearchControllerDelegat
         guard allPostsLoaded == false, loadingPosts == false else { return }
         loadingPosts = true
         self.spinner.startAnimating()
-        NewsService.fetchTimeline(cursor: timeline.count+1) { [weak self] feed in
+        NewsService.fetchMorePosts(cursor: timeline.count+1) { [weak self] feed in
             self?.spinner.stopAnimating()
             self?.loadingPosts = false
             guard feed.count > 0 else {
