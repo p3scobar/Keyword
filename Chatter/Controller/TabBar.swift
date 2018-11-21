@@ -20,7 +20,7 @@ class TabBar: UITabBarController, UITabBarControllerDelegate {
         
         delegate = self
         
-        timelineVC = TimelineController(style: .plain)
+        timelineVC = TimelineController()
         let timeline = UINavigationController(rootViewController: timelineVC)
         timeline.tabBarItem.image = UIImage(named: "iconHome")
         timeline.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -6, right: 0)
@@ -47,6 +47,32 @@ class TabBar: UITabBarController, UITabBarControllerDelegate {
         
         viewControllers = [timeline, discover, wallet, activity, account]
 
+        checkForNotifications()
+        NotificationCenter.default.addObserver(self, selector: #selector(checkForNotifications), name: .UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotificationObserver), name: Notification.Name(rawValue: "notifications"), object: nil)
+    }
+    
+    
+    @objc func checkForNotifications() {
+        ActivityService.fetchActivity { (notifications) in
+            let unread = notifications.filter({ $0.unread == true })
+            self.updateNotificationBadge(unread.count)
+        }
+    }
+    
+    @objc func handleNotificationObserver(_ notification: Notification) {
+        guard let count = notification.userInfo?["count"] as? Int else { return }
+        updateNotificationBadge(count)
+    }
+    
+    func updateNotificationBadge(_ count: Int) {
+        guard let item = tabBar.items?[3] else { return }
+        guard count > 0 else {
+            item.badgeValue = nil
+            return
+        }
+        item.badgeColor = Theme.highlight
+        item.badgeValue = "\(count)"
     }
 
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -60,6 +86,9 @@ class TabBar: UITabBarController, UITabBarControllerDelegate {
         }
         if item == items[2] {
             activityVC.scrollToTop()
+        }
+        if item == items[3] {
+            checkForNotifications()
         }
     }
     

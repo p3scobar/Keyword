@@ -12,6 +12,7 @@ import UIKit
 
 class NotificationsController: UITableViewController {
     
+
     override init(style: UITableViewStyle) {
         super.init(style: style)
         if Model.shared.soundsEnabled {
@@ -28,12 +29,14 @@ class NotificationsController: UITableViewController {
         cell.textLabel?.text = "Notifications"
         cell.textLabel?.textColor = Theme.white
         cell.accessoryView = toggleNotifications
+        cell.backgroundColor = Theme.cellBackground
         cell.textLabel?.font = Theme.medium(18)
         return cell
     }()
     
     lazy var soundCell: UITableViewCell = {
         let cell = UITableViewCell()
+        cell.backgroundColor = Theme.cellBackground
         cell.textLabel?.text = "Sounds"
         cell.textLabel?.font = Theme.medium(18)
         cell.accessoryView = toggleSound
@@ -64,6 +67,8 @@ class NotificationsController: UITableViewController {
         super.viewDidLoad()
         customization()
         setupView()
+        tableView.backgroundColor = Theme.darkBackground
+        tableView.separatorColor = Theme.border
         tableView.allowsSelection = false
 //        OneSignal.promptForPushNotifications { (accepted) in
 //            if accepted {

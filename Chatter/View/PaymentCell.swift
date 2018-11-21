@@ -19,14 +19,15 @@ class PaymentCell: UITableViewCell {
             let imageUrl = payment!.fetchOtherImage()
             let url = URL(string: imageUrl)
             self.profileImage.kf.setImage(with: url)
-            amountLabel.text = payment!.amount
+            let amount = Decimal(string: payment!.amount ?? "0.00")?.rounded(2)
+            amountLabel.text = amount
         }
     }
     
     
     let profileImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = 24
+        imageView.layer.cornerRadius = 28
         imageView.backgroundColor = Theme.unfilled
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
@@ -64,8 +65,8 @@ class PaymentCell: UITableViewCell {
         
         profileImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         profileImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
-        profileImage.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        profileImage.widthAnchor.constraint(equalToConstant: 48).isActive = true
+        profileImage.heightAnchor.constraint(equalToConstant: 56).isActive = true
+        profileImage.widthAnchor.constraint(equalToConstant: 56).isActive = true
         
         nameLabel.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 16).isActive = true
         nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true

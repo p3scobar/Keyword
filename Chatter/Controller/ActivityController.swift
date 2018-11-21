@@ -52,6 +52,13 @@ class ActivityController: UITableViewController, UISearchControllerDelegate, UIN
     @objc func fetchData() {
         ActivityService.fetchActivity { (notifications) in
             self.notifications = notifications
+            self.markAllAsRead()
+        }
+    }
+    
+    func markAllAsRead() {
+        ActivityService.markAllRead { (success) in
+            self.tableView.reloadData()
         }
     }
     
@@ -88,7 +95,7 @@ class ActivityController: UITableViewController, UISearchControllerDelegate, UIN
     
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var height: CGFloat = 60
+        var height: CGFloat = 54
         if let text = notifications[indexPath.row].text {
             let textHeight = estimateFrameForTextWidth(width: view.frame.width-84, text: text, fontSize: 18)
             height += (textHeight <= 36) ? textHeight : 36

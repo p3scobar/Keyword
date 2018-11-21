@@ -40,6 +40,7 @@ class MnemonicController: UITableViewController {
         }
         tableView.tableHeaderView = header
         tableView.allowsSelection = false
+        tableView.backgroundColor = Theme.darkBackground
         tableView.separatorColor = Theme.border
         tableView.tableFooterView = UIView()
         self.navigationItem.title = "Secret Phrase"
@@ -71,6 +72,7 @@ class MnemonicController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = Theme.semibold(20)
+        cell.backgroundColor = Theme.cellBackground
         if mnemonic.count > 0 {
             let words = mnemonic.components(separatedBy: .whitespaces)
             let word = words[indexPath.row]

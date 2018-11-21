@@ -85,13 +85,12 @@ class StatusController: UITableViewController, UINavigationBarDelegate, StatusCe
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let background = UIView()
         if indexPath.section == 0 {
-            print("Tableview fuckery")
             let cell = tableView.dequeueReusableCell(withIdentifier: statusCellLarge, for: indexPath) as! StatusCellLarge
             cell.delegate = self
             cell.indexPath = indexPath
             cell.status = status
             cell.bottomLine.isHidden = false
-            cell.like = isFavorited(id: cell.status?.id ?? "")
+//            cell.like = isFavorited(id: cell.status?.id ?? "")
             cell.selectionStyle = .none
             background.backgroundColor = Theme.darkBackground
             cell.selectedBackgroundView = background
@@ -175,8 +174,8 @@ class StatusController: UITableViewController, UINavigationBarDelegate, StatusCe
     }
 
 
-    func handleLike(postId: String, like: Bool) {
-        NewsService.likePost(postId: postId, like: like)
+    func handleLike(postId: String) {
+        NewsService.likePost(postId: postId)
     }
 
 

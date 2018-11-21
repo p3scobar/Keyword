@@ -24,6 +24,17 @@ class StatusCellLarge: StatusCell {
         }
     }
     
+    override func setupImage() {
+        if let imageUrl = status?.image, imageUrl != "" {
+            imageHeightAnchor?.constant = 240
+            let url = URL(string: imageUrl)
+            mainImageView.kf.setImage(with: url)
+        } else {
+            mainImageView.image = nil
+            imageHeightAnchor?.constant = 0
+        }
+    }
+    
     override func setupName() {
         if let name = status?.name {
             nameLabel.text = name

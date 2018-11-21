@@ -22,6 +22,7 @@ class EditProfileController: UITableViewController, UITextFieldDelegate, InputTe
         super.viewDidLoad()
         tableView.isScrollEnabled = true
         tableView.alwaysBounceVertical = true
+        tableView.backgroundColor = Theme.darkBackground
         tableView.separatorColor = Theme.border
         tableView.register(InputTextCell.self, forCellReuseIdentifier: inputCell)
         tableView.register(InputTextViewCell.self, forCellReuseIdentifier: inputTextView)

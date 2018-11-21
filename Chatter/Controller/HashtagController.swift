@@ -112,8 +112,8 @@ class HashtagController: UITableViewController, UISearchControllerDelegate, UINa
     }
     
     
-    func handleLike(postId: String, like: Bool) {
-        NewsService.likePost(postId: postId, like: like)
+    func handleLike(postId: String) {
+        NewsService.likePost(postId: postId)
     }
     
     

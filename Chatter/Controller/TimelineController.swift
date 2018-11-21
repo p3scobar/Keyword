@@ -56,12 +56,13 @@ class TimelineController: CoreDataTableViewController, UISearchControllerDelegat
         NotificationCenter.default.addObserver(self, selector: #selector(handleLogin(notification:)), name: Notification.Name("login"), object: nil)
         tableView.refreshControl = refresh
         refresh.tintColor = Theme.lightGray
-        refresh.addTarget(self, action: #selector(fetchData), for: .valueChanged)
+        refresh.addTarget(self, action: #selector(fetchData(_:)), for: .valueChanged)
         extendedLayoutIncludesOpaqueBars = true
+        
     }
     
     @objc func handleLogin(notification:Notification) {
-        fetchData()
+        fetchData(nil)
     }
     
     @objc func handleCompose() {
@@ -93,7 +94,7 @@ class TimelineController: CoreDataTableViewController, UISearchControllerDelegat
             presentHomeController()
             return
         }
-        fetchData()
+        fetchData(nil)
         NewsService.fetchLikes()
         NotificationCenter.default.addObserver(self, selector: #selector(newPostUploaded(notification:)), name: Notification.Name("newPost"), object: nil)
     }
@@ -114,11 +115,11 @@ class TimelineController: CoreDataTableViewController, UISearchControllerDelegat
         self.tabBarController?.present(nav, animated: false, completion: nil)
     }
 
-    @objc func fetchData() {
+    @objc func fetchData(_ sender: UIRefreshControl?) {
         allPostsLoaded = false
-        NewsService.fetchSavedTimeline { [weak self] (posts) in
-            self?.timeline = posts
-        }
+//        NewsService.fetchSavedTimeline { [weak self] (posts) in
+//            self?.timeline = posts
+//        }
         NewsService.fetchTimeline(cursor: 0) { [weak self] (feed) in
             self?.timeline = feed
             self?.printStats()
@@ -183,8 +184,8 @@ class TimelineController: CoreDataTableViewController, UISearchControllerDelegat
         return timeline[indexPath.row].height(withReply: true)
     }
     
-    func handleLike(postId: String, like: Bool) {
-        NewsService.likePost(postId: postId, like: like)
+    func handleLike(postId: String) {
+        NewsService.likePost(postId: postId)
     }
     
     func handleComment(status: Status) {

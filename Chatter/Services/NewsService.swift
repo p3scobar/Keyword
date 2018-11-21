@@ -60,7 +60,7 @@ struct NewsService {
             let headers: HTTPHeaders = ["Authorization": "Bearer \(Model.shared.token)"]
             let params: [String:Any] = ["cursor":cursor]
             var feed: [Status] = []
-            feed = Status.fetchAll(in: PersistenceService.context)
+            //feed = Status.fetchAll(in: PersistenceService.context)
             Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
                 guard let json = response.result.value as? [String:Any],
                     let resp = json["response"] as? [String:Any],
@@ -68,9 +68,9 @@ struct NewsService {
                         completion([])
                 }
                 results.forEach({ (result) in
-                    let id = result["_id"] as? String ?? ""
+                    guard let id = result["_id"] as? String else { return }
                     let status = Status.findOrCreateStatus(id: id, data: result, in: PersistenceService.context)
-                    if !feed.contains(status) {
+                    if !feed.contains(status), status.inReplyToId == nil {
                         feed.append(status)
                     }
                 })
@@ -257,44 +257,44 @@ struct NewsService {
         }
     }
     
-    
-    static func fetchComments(postId: String, completion: @escaping ([Comment]) -> Void) {
-        let urlString = "\(baseUrl)/comments"
-        let url = URL(string: urlString)!
-        let token = Model.shared.token
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
-        let params: [String:Any] = ["id":postId]
-        Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
-            var comments = [Comment]()
-            guard let json = response.result.value as? [String:Any],
-                let resp = json["response"] as? [String:Any],
-                let results = resp["comments"] as? [[String:Any]] else { return }
-            results.forEach({ (result) in
-                let id = result["_id"] as? String ?? ""
-                let comment = Comment.findOrCreateComment(id: id, data: result, in: PersistenceService.context)
-                comments.append(comment)
-            })
-            completion(comments)
-        }
-    }
-    
-    
-    
-    static func postComment(postId: String, text: String, completion: @escaping (Comment) -> Void) {
-        let urlString = "\(baseUrl)/comment"
-        let url = URL(string: urlString)!
-        let token = Model.shared.token
-        let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
-        let params: Parameters = ["postId":postId, "text":text]
-        Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
-            guard let json = response.result.value as? [String:Any],
-                let resp = json["response"] as? [String:Any],
-                let data = resp["comment"] as? [String:Any] else { return }
-            let id = data["_id"] as? String ?? ""
-            let comment = Comment.findOrCreateComment(id: id, data: data, in: PersistenceService.context)
-            completion(comment)
-        }
-    }
+//    
+//    static func fetchComments(postId: String, completion: @escaping ([Comment]) -> Void) {
+//        let urlString = "\(baseUrl)/comments"
+//        let url = URL(string: urlString)!
+//        let token = Model.shared.token
+//        let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
+//        let params: [String:Any] = ["id":postId]
+//        Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
+//            var comments = [Comment]()
+//            guard let json = response.result.value as? [String:Any],
+//                let resp = json["response"] as? [String:Any],
+//                let results = resp["comments"] as? [[String:Any]] else { return }
+//            results.forEach({ (result) in
+//                let id = result["_id"] as? String ?? ""
+//                let comment = Comment.findOrCreateComment(id: id, data: result, in: PersistenceService.context)
+//                comments.append(comment)
+//            })
+//            completion(comments)
+//        }
+//    }
+//    
+//    
+//    
+//    static func postComment(postId: String, text: String, completion: @escaping (Comment) -> Void) {
+//        let urlString = "\(baseUrl)/comment"
+//        let url = URL(string: urlString)!
+//        let token = Model.shared.token
+//        let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
+//        let params: Parameters = ["postId":postId, "text":text]
+//        Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
+//            guard let json = response.result.value as? [String:Any],
+//                let resp = json["response"] as? [String:Any],
+//                let data = resp["comment"] as? [String:Any] else { return }
+//            let id = data["_id"] as? String ?? ""
+//            let comment = Comment.findOrCreateComment(id: id, data: data, in: PersistenceService.context)
+//            completion(comment)
+//        }
+//    }
     
     
 //    static func postReply(inReplyToId: String, text: String, link: String?, linkImage: String?, linkTitle: String?, mentions: [String]) {
@@ -318,7 +318,8 @@ struct NewsService {
 //    }
     
     
-    static func likePost(postId: String, like: Bool) {
+    static func likePost(postId: String) {
+        let like = Like.likePost(postId: postId, in: PersistenceService.context)
         let urlString = "\(baseUrl)/like"
         let url = URL(string: urlString)!
         let token = Model.shared.token

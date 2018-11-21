@@ -20,7 +20,7 @@ public class Status: NSManagedObject {
         do {
             let matches = try context.fetch(request)
             if matches.count > 0 {
-                //assert(matches.count > 1, "Status.findOrCreateStatus -- Database inconsistency")
+                //assert(matches.count == 1, "Status.findOrCreateStatus -- Database inconsistency")
                 let fetched = matches[0]
                 fetched.id = id
                 fetched.text = data["text"] as? String
@@ -43,7 +43,6 @@ public class Status: NSManagedObject {
                 fetched.linkTitle = data["linkTitle"] as? String
                 fetched.likeCount = data["likeCount"] as? Int16 ?? 0
                 
-                PersistenceService.saveContext()
                 return fetched
             }
         } catch {
@@ -75,7 +74,6 @@ public class Status: NSManagedObject {
         }
         status.linkTitle = data["linkTitle"] as? String
         status.likeCount = data["likeCount"] as? Int16 ?? 0
-        
         PersistenceService.saveContext()
         return status
     }
@@ -83,9 +81,11 @@ public class Status: NSManagedObject {
     
     static func fetchAll(in context: NSManagedObjectContext) -> [Status] {
         let request: NSFetchRequest<Status> = Status.fetchRequest()
+        request.fetchLimit = 200
         var feed: [Status] = []
         do {
-            feed = try context.fetch(request)
+            let fetched = try context.fetch(request)
+            feed = fetched.filter({$0.inReplyToId == nil})
         } catch {
             let error = error
             print(error.localizedDescription)
@@ -93,6 +93,16 @@ public class Status: NSManagedObject {
         return feed
     }
 
+    static func deleteAll() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Status")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        let container = PersistenceService.persistentContainer
+        do {
+            try container.viewContext.execute(deleteRequest)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
 
 }
 

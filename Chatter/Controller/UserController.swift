@@ -13,17 +13,15 @@ import SimpleImageViewer
 
 class UserController: UITableViewController, UserHeaderDelegate, StatusCellDelegate {
     
+    private let refresh = UIRefreshControl()
     private var spinner: UIActivityIndicatorView!
     private let statusCell = "statusCell"
     
     var following: Bool = false {
         didSet {
-            print("FOLLOWING: \(following)")
             self.header.following = following
         }
     }
-    
-    private let refresh = UIRefreshControl()
     
     var user: User? {
         didSet {
@@ -141,10 +139,12 @@ class UserController: UITableViewController, UserHeaderDelegate, StatusCellDeleg
     var loadingPosts: Bool = false
     
     func loadMorePosts() {
-        guard allPostsLoaded == false, loadingPosts == false else { return }
+        guard allPostsLoaded == false,
+            loadingPosts == false,
+        let userId = user?.id else { return }
         loadingPosts = true
         self.spinner.startAnimating()
-        NewsService.fetchTimeline(cursor: timeline.count+1) { [weak self] feed in
+        NewsService.fetchPosts(cursor: timeline.count+1, forUser: userId) { [weak self] (feed) in
             self?.spinner.stopAnimating()
             self?.loadingPosts = false
             guard feed.count > 0 else {
@@ -170,13 +170,31 @@ class UserController: UITableViewController, UserHeaderDelegate, StatusCellDeleg
     
     func handleFollow() {
         guard let id = user?.id else { return }
+        guard following == false else {
+            presentUnfollowAlert()
+            return
+        }
         UserService.follow(userId: id, follow: !following) { (following) in
             self.following = following
         }
     }
     
+    func presentUnfollowAlert() {
+        guard let id = user?.id else { return }
+        let username = user?.username ?? ""
+        let alert = UIAlertController(title: "@\(username)", message: nil, preferredStyle: .actionSheet)
+        let unfollow = UIAlertAction(title: "Unfollow", style: .destructive) { (_) in
+            UserService.follow(userId: id, follow: !self.following) { (following) in
+                self.following = following
+            }
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(unfollow)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
     func handlePay() {
-        print(user?.publicKey)
         guard let pk = user?.publicKey else { return }
         guard KeychainHelper.privateSeed != "" else {
             presentRecoveryController()
@@ -197,8 +215,8 @@ class UserController: UITableViewController, UserHeaderDelegate, StatusCellDeleg
         self.hidesBottomBarWhenPushed = false
     }
 
-    func handleLike(postId: String, like: Bool) {
-        print("USER CONTROLLER: FIX THIS")
+    func handleLike(postId: String) {
+        NewsService.likePost(postId: postId)
     }
     
     func handleComment(status: Status) {

@@ -22,6 +22,8 @@ class EmailController: UITableViewController, InputTextCellDelegate {
         super.viewDidLoad()
         tableView.register(InputTextCell.self, forCellReuseIdentifier: inputCell)
         title = "Change Email"
+        tableView.backgroundColor = Theme.darkBackground
+        tableView.separatorColor = Theme.border
         tableView.tableFooterView = UIView()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(handleSubmit))
     }

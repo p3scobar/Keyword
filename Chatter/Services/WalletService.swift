@@ -231,6 +231,11 @@ struct WalletService {
     
     static func sendPayment(accountId: String, amount: Decimal, completion: @escaping (Bool) -> Void) {
         
+        print("Account ID: \(accountId)")
+        print("Amount: \(amount)")
+        print("Public Key: \(KeychainHelper.publicKey)")
+        print("Private Key: \(KeychainHelper.privateSeed)")
+        
         guard KeychainHelper.privateSeed != "",
             let sourceKeyPair = try? KeyPair(secretSeed: KeychainHelper.privateSeed) else {
                 DispatchQueue.main.async {

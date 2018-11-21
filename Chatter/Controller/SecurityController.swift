@@ -18,6 +18,8 @@ class SecurityController: UITableViewController {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: standardCell)
         title = "Security"
+        tableView.backgroundColor = Theme.darkBackground
+        tableView.separatorColor = Theme.border
         tableView.tableFooterView = UIView()
     }
     

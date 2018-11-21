@@ -167,9 +167,8 @@ struct UserService {
             Model.shared.profileImage = ""
             Model.shared.bio = ""
             Model.shared.token = ""
-            KeychainHelper.publicKey = ""
-            KeychainHelper.privateSeed = ""
-            KeychainHelper.mnemonic = ""
+            Status.deleteAll()
+            Activity.deleteAll()
             completion(true)
         }
     }

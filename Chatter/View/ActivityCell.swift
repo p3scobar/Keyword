@@ -25,6 +25,8 @@ class ActivityCell: UITableViewCell {
                 let url = URL(string: image)
                 profileImage.kf.setImage(with: url)
             }
+            
+            backgroundColor = activity!.unread ? Theme.tintColor : Theme.cellBackground
         }
     }
     
@@ -72,8 +74,6 @@ class ActivityCell: UITableViewCell {
         view.layer.cornerRadius = 28
         view.backgroundColor = Theme.unfilled
         view.contentMode = .scaleAspectFill
-//        view.layer.borderWidth = 0.5
-//        view.layer.borderColor = Theme.border.cgColor
         view.isUserInteractionEnabled = true
         view.layer.masksToBounds = true
         return view
@@ -104,8 +104,15 @@ class ActivityCell: UITableViewCell {
         view.layer.cornerRadius = 24
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-        
     }()
+    
+//    lazy var unreadView: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = Theme.highlight
+//        view.isHidden = true
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        return view
+//    }()
     
     
     func setupView() {
@@ -113,6 +120,7 @@ class ActivityCell: UITableViewCell {
         addSubview(profileImage)
         addSubview(nameLabel)
         addSubview(statusLabel)
+//        addSubview(unreadView)
         
         nameLabel.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 12).isActive = true
         nameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -12).isActive = true
@@ -129,6 +137,11 @@ class ActivityCell: UITableViewCell {
         statusLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
         statusLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 22).isActive = true
 
+//        unreadView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+//        unreadView.widthAnchor.constraint(equalToConstant: 5).isActive = true
+//        unreadView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+//        unreadView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+//
         
     }
     

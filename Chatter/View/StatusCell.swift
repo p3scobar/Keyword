@@ -13,7 +13,7 @@ import ActiveLabel
 
 protocol StatusCellDelegate: class {
     func handleComment(status: Status)
-    func handleLike(postId: String, like: Bool)
+    func handleLike(postId: String)
     func handleUserTap(userId: String)
     func handleLinkTap(url: URL)
     func handleMentionTap(_ username: String)
@@ -57,7 +57,8 @@ class StatusCell: UITableViewCell {
     var status: Status? {
         didSet {
             setupCell()
-            like = isFavorited(id: status?.id ?? "")
+            guard let postID = status?.id else { return }
+            like = Like.checkIfLiked(postId: postID)
         }
     }
     
@@ -71,7 +72,8 @@ class StatusCell: UITableViewCell {
     
     func setupCell() {
         setupName()
-        backgroundColor = Theme.cellBackground
+        setupImage()
+        
         statusLabel.text = status?.text
         if let text = status?.text, text != "" {
             let width = UIScreen.main.bounds.width-100
@@ -87,15 +89,6 @@ class StatusCell: UITableViewCell {
         
         if let likes = status?.likeCount {
             likeCount = Int(likes)
-        }
-        
-        if let imageUrl = status?.image, imageUrl != "" {
-            imageHeightAnchor?.constant = 180
-            let url = URL(string: imageUrl)
-            mainImageView.kf.setImage(with: url)
-        } else {
-            mainImageView.image = nil
-            imageHeightAnchor?.constant = 0
         }
         
         setupLinkView()
@@ -134,6 +127,17 @@ class StatusCell: UITableViewCell {
         if let userImageUrl = status?.userImage {
             let url = URL(string: userImageUrl)
             profileImageView.kf.setImage(with: url)
+        }
+    }
+    
+    func setupImage() {
+        if let imageUrl = status?.image, imageUrl != "" {
+            imageHeightAnchor?.constant = 180
+            let url = URL(string: imageUrl)
+            mainImageView.kf.setImage(with: url)
+        } else {
+            mainImageView.image = nil
+            imageHeightAnchor?.constant = 0
         }
     }
     
@@ -296,7 +300,7 @@ class StatusCell: UITableViewCell {
             likeCount -= 1
             status?.likeCount -= Int16(exactly: 1)!
         }
-        delegate?.handleLike(postId: id, like: like)
+        delegate?.handleLike(postId: id)
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -304,7 +308,7 @@ class StatusCell: UITableViewCell {
         setupView()
         let userTap = UITapGestureRecognizer(target: self, action: #selector(handleUserTap))
         profileImageView.addGestureRecognizer(userTap)
-        
+        backgroundColor = Theme.cellBackground
     }
     
     

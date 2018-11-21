@@ -162,12 +162,8 @@ class AccountController: UITableViewController, MFMailComposeViewControllerDeleg
         let message = UIAlertAction(title: "Message", style: .default) { (mail) in
             self.presentMessageController()
         }
-        let mail = UIAlertAction(title: "Email", style: .default) { (mail) in
-            self.presentMailController()
-        }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(message)
-        alert.addAction(mail)
         alert.addAction(cancel)
         self.present(alert, animated: true, completion: nil)
     }
@@ -255,12 +251,6 @@ class AccountController: UITableViewController, MFMailComposeViewControllerDeleg
         present(alert, animated: true, completion: nil)
     }
     
-    func generateNewPixel() {
-//        let pixelView = PixelView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
-//        let image = UIImage.imageWithView(pixelView)
-//        header.profileImage.image = image
-//        UserManager.updateProfilePic(image: image)
-    }
     
     
     func presentImagePickerController() {

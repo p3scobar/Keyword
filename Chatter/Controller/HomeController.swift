@@ -32,7 +32,7 @@ class HomeController: UIViewController {
     
     let headline: UILabel = {
         let view = UILabel()
-        view.text = "Status"
+        view.text = "Keyword"
         view.font = UIFont(name: "Avenir-Black", size: 60)
         view.textColor = Theme.white
         view.textAlignment = .center

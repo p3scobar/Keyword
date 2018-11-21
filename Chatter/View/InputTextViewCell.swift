@@ -30,7 +30,8 @@ class InputTextViewCell: UITableViewCell, UITextViewDelegate {
         let view = UITextView()
         view.font = Theme.medium(18)
         view.placeholderColor = Theme.gray
-        view.textColor = Theme.white
+        view.textColor = .white
+        view.backgroundColor = Theme.cellBackground
         view.contentInset = UIEdgeInsetsMake(8, 0, 0, 0)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

@@ -12,14 +12,13 @@ import SafariServices
 import CoreData
 import SimpleImageViewer
 
-class DiscoverController: UITableViewController, UISearchBarDelegate, UINavigationBarDelegate, StatusCellDelegate, UITabBarControllerDelegate {
+class DiscoverController: CoreDataTableViewController, UISearchBarDelegate, UINavigationBarDelegate, StatusCellDelegate, UITabBarControllerDelegate {
     
     private let statusCell = "newsCell"
     private let userCell = "userCell"
     
     private let refresh = UIRefreshControl()
     var searchController: UISearchController!
-//    var swipeController: SwipeController!
     var spinner: UIActivityIndicatorView!
     
     var timeline = [Status]() {
@@ -35,7 +34,7 @@ class DiscoverController: UITableViewController, UISearchBarDelegate, UINavigati
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-//                self.refresh.endRefreshing()
+                self.refresh.endRefreshing()
             }
         }
     }
@@ -45,6 +44,7 @@ class DiscoverController: UITableViewController, UISearchBarDelegate, UINavigati
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = Theme.darkBackground
         tableView.backgroundColor = Theme.darkBackground
         tableView.register(StatusCell.self, forCellReuseIdentifier: statusCell)
@@ -187,7 +187,7 @@ class DiscoverController: UITableViewController, UISearchBarDelegate, UINavigati
         guard allPostsLoaded == false, loadingPosts == false else { return }
         loadingPosts = true
         self.spinner.startAnimating()
-        NewsService.discover(cursor: timeline.count-1) { [weak self] (posts, _) in
+        NewsService.discover(cursor: timeline.count+1) { [weak self] (posts, _) in
             self?.loadingPosts = false
             self?.spinner.stopAnimating()
             guard posts.count > 0 else {
@@ -201,7 +201,7 @@ class DiscoverController: UITableViewController, UISearchBarDelegate, UINavigati
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            var height: CGFloat = 80
+            var height: CGFloat = 72
             if let bio = users[indexPath.row].bio {
                 let textHeight = bio.height(forWidth: view.frame.width-84, font: Theme.medium(18))
                 height += textHeight+10
@@ -213,12 +213,16 @@ class DiscoverController: UITableViewController, UISearchBarDelegate, UINavigati
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return timeline[indexPath.row].height(withReply: true)
+        if indexPath.section == 0 {
+            return 80
+        } else {
+            return timeline[indexPath.row].height(withReply: true)
+        }
     }
     
     
-    func handleLike(postId: String, like: Bool) {
-        NewsService.likePost(postId: postId, like: like)
+    func handleLike(postId: String) {
+        NewsService.likePost(postId: postId)
     }
     
     

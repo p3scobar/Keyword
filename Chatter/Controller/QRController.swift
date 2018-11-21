@@ -88,7 +88,7 @@ class QRController: UIViewController {
         let button = UIButton()
         button.setTitle("Copy", for: .normal)
         button.titleLabel?.font = Theme.bold(20)
-        button.setTitleColor(.darkGray, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(handleCopy), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

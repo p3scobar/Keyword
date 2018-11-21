@@ -19,7 +19,7 @@ extension Activity {
     @NSManaged public var id: String?
     @NSManaged public var type: String?
     @NSManaged public var text: String?
-    @NSManaged public var timestamp: NSDate?
+    @NSManaged public var timestamp: Date
     @NSManaged public var unread: Bool
     @NSManaged public var statusId: String?
     @NSManaged public var name: String?

@@ -26,7 +26,7 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
     }
     
     lazy var header: WalletHeaderView = {
-        let view = WalletHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 180))
+        let view = WalletHeaderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 160))
         return view
     }()
     
@@ -34,6 +34,7 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
         super.viewDidLoad()
         header.delegate = self
         tableView.backgroundColor = Theme.darkBackground
+        tableView.separatorColor = Theme.border
         self.navigationItem.title = "Wallet"
         tableView.showsVerticalScrollIndicator = false
         tableView.tableHeaderView = header

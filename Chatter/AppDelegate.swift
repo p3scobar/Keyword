@@ -36,11 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = Theme.white
         UITabBar.appearance().unselectedItemTintColor = Theme.gray
         
-        UITableView.appearance().separatorColor = Theme.border
-//        UIScrollView.appearance().backgroundColor = Theme.darkBackground
-        UITableViewCell.appearance().backgroundColor = Theme.cellBackground
-        
-        UITableView.appearance().backgroundColor = Theme.darkBackground
+//        UITableView.appearance().separatorColor = Theme.border
+//        UITableViewCell.appearance().backgroundColor = Theme.cellBackground
+//        UITableView.appearance().backgroundColor = Theme.darkBackground
         
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         

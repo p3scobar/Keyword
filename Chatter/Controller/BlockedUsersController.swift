@@ -42,8 +42,8 @@ class BlockedUsersController: UITableViewController {
         refreshControl?.addTarget(self, action: #selector(fetchData), for: .valueChanged)
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.hidesSearchBarWhenScrolling = false
-        
+        tableView.backgroundColor = Theme.darkBackground
+        tableView.separatorColor = Theme.border
         tableView.tableFooterView = UIView()
         tableView.separatorInset = UIEdgeInsetsMake(0, 100, 0, 0)
         fetchData()

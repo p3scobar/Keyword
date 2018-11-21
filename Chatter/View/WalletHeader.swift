@@ -124,12 +124,12 @@ class WalletHeaderView: UIView {
         shadow.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
         shadow.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
         shadow.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        shadow.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -10).isActive = true
+        shadow.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
         
         container.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         container.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         container.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        container.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -10).isActive = true
+        container.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
         
         qrView.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
         qrView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 16).isActive = true

@@ -32,6 +32,8 @@
 		CE218CFB211BCF8400AD1EF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE218CFA211BCF8400AD1EF2 /* GoogleService-Info.plist */; };
 		CE218CFD211BDC4B00AD1EF2 /* UsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE218CFC211BDC4B00AD1EF2 /* UsersController.swift */; };
 		CE2E61A4219FA0E200BF46B8 /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E61A3219FA0E200BF46B8 /* DrawerController.swift */; };
+		CE2E61A721A0B72F00BF46B8 /* Like+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E61A521A0B72F00BF46B8 /* Like+CoreDataClass.swift */; };
+		CE2E61A821A0B72F00BF46B8 /* Like+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E61A621A0B72F00BF46B8 /* Like+CoreDataProperties.swift */; };
 		CE72D63C213F4250000A5397 /* WalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72D63B213F4250000A5397 /* WalletController.swift */; };
 		CE72D63E213F426A000A5397 /* WalletHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72D63D213F426A000A5397 /* WalletHeader.swift */; };
 		CE72D640213F4677000A5397 /* WalletService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72D63F213F4677000A5397 /* WalletService.swift */; };
@@ -116,6 +118,8 @@
 		CE218CFA211BCF8400AD1EF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE218CFC211BDC4B00AD1EF2 /* UsersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersController.swift; sourceTree = "<group>"; };
 		CE2E61A3219FA0E200BF46B8 /* DrawerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
+		CE2E61A521A0B72F00BF46B8 /* Like+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Like+CoreDataClass.swift"; path = "/Users/Hello/Desktop/Projects/Chatter/Chatter/Model/Like+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		CE2E61A621A0B72F00BF46B8 /* Like+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Like+CoreDataProperties.swift"; path = "/Users/Hello/Desktop/Projects/Chatter/Chatter/Model/Like+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		CE72D63B213F4250000A5397 /* WalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletController.swift; sourceTree = "<group>"; };
 		CE72D63D213F426A000A5397 /* WalletHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeader.swift; sourceTree = "<group>"; };
 		CE72D63F213F4677000A5397 /* WalletService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletService.swift; sourceTree = "<group>"; };
@@ -201,6 +205,8 @@
 		CE961EE0210D257D00025D0D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CE2E61A521A0B72F00BF46B8 /* Like+CoreDataClass.swift */,
+				CE2E61A621A0B72F00BF46B8 /* Like+CoreDataProperties.swift */,
 				CE72D645213F4AE5000A5397 /* Payment+CoreDataClass.swift */,
 				CE72D643213F4A71000A5397 /* Payment+CoreDataProperties.swift */,
 				CE961F21210EE29000025D0D /* Activity+CoreDataClass.swift */,
@@ -514,6 +520,7 @@
 				CE961ED7210BFD6900025D0D /* NewsService.swift in Sources */,
 				CE961F28210EE29000025D0D /* Status+CoreDataProperties.swift in Sources */,
 				CE72D650213F528F000A5397 /* AmountController.swift in Sources */,
+				CE2E61A821A0B72F00BF46B8 /* Like+CoreDataProperties.swift in Sources */,
 				CE024EBA2113A76400E51F37 /* InputTextCell.swift in Sources */,
 				CE024EAE2113886100E51F37 /* ActivityCell.swift in Sources */,
 				CE961F26210EE29000025D0D /* User+CoreDataClass.swift in Sources */,
@@ -545,6 +552,7 @@
 				CE961F25210EE29000025D0D /* User+CoreDataProperties.swift in Sources */,
 				CE961EF8210D364400025D0D /* ActivityController.swift in Sources */,
 				CECC040121176C2400AD8390 /* Activity+CoreDataProperties.swift in Sources */,
+				CE2E61A721A0B72F00BF46B8 /* Like+CoreDataClass.swift in Sources */,
 				CE218CFD211BDC4B00AD1EF2 /* UsersController.swift in Sources */,
 				CE024EC22113AD3900E51F37 /* PixelView.swift in Sources */,
 				CE72D63E213F426A000A5397 /* WalletHeader.swift in Sources */,

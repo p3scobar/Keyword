@@ -21,6 +21,8 @@ class PasswordController: UITableViewController, InputTextCellDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = Theme.darkBackground
+        tableView.separatorColor = Theme.border
         tableView.register(InputTextCell.self, forCellReuseIdentifier: inputCell)
         title = "Change Password"
         tableView.tableFooterView = UIView()

@@ -55,6 +55,7 @@ public class Payment: NSManagedObject {
     
     static func fetchAll(in context: NSManagedObjectContext) -> [Payment] {
         let request: NSFetchRequest<Payment> = Payment.fetchRequest()
+        request.fetchLimit = 100
         var payments: [Payment] = []
         do {
             payments = try context.fetch(request)
