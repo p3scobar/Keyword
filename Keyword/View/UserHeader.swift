@@ -57,8 +57,10 @@ class UserHeader: UIView {
             }
             if user?.publicKey != nil {
                 payButton.isEnabled = true
+                payButton.isHidden = false
             } else {
                 payButton.isEnabled = false
+                payButton.isHidden = true
             }
             if isCurrentUser {
                 followButton.isHidden = true
@@ -66,7 +68,6 @@ class UserHeader: UIView {
             } else {
                 followButton.isHidden = false
                 payButton.isHidden = false
-                
             }
         }
     }

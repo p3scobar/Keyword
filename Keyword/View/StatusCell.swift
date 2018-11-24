@@ -207,8 +207,6 @@ class StatusCell: UITableViewCell {
         view.layer.cornerRadius = 28
         view.backgroundColor = Theme.unfilled
         view.clipsToBounds = true
-//        view.layer.borderColor = Theme.border.cgColor
-//        view.layer.borderWidth = 0.5
         view.isUserInteractionEnabled = true
         return view
     }()

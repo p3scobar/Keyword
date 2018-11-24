@@ -30,7 +30,6 @@
 		CE218CEF2118C30C00AD1EF2 /* BlockedUsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE218CEE2118C30C00AD1EF2 /* BlockedUsersController.swift */; };
 		CE218CF12118C33600AD1EF2 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE218CF02118C33600AD1EF2 /* UserCell.swift */; };
 		CE218CF32118C63400AD1EF2 /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE218CF22118C63400AD1EF2 /* NotificationsController.swift */; };
-		CE218CFB211BCF8400AD1EF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE218CFA211BCF8400AD1EF2 /* GoogleService-Info.plist */; };
 		CE218CFD211BDC4B00AD1EF2 /* UsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE218CFC211BDC4B00AD1EF2 /* UsersController.swift */; };
 		CE2E61A4219FA0E200BF46B8 /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E61A3219FA0E200BF46B8 /* DrawerController.swift */; };
 		CE2E61A721A0B72F00BF46B8 /* Like+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E61A521A0B72F00BF46B8 /* Like+CoreDataClass.swift */; };
@@ -114,7 +113,6 @@
 		CE2E625C21A8C54900BF46B8 /* UserHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE961EF5210D2FBB00025D0D /* UserHeader.swift */; };
 		CE2E626021A8C54900BF46B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEBB93F210BF829007E87EE /* LaunchScreen.storyboard */; };
 		CE2E626121A8C54900BF46B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEEBB93D210BF829007E87EE /* Assets.xcassets */; };
-		CE2E626221A8C54900BF46B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE218CFA211BCF8400AD1EF2 /* GoogleService-Info.plist */; };
 		CE2E626C21A8EE7F00BF46B8 /* UsernameToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E626B21A8EE7F00BF46B8 /* UsernameToolbarView.swift */; };
 		CE2E626E21A8EF7100BF46B8 /* UsernameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E626D21A8EF7100BF46B8 /* UsernameCell.swift */; };
 		CE2E626F21A8EF7100BF46B8 /* UsernameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E626D21A8EF7100BF46B8 /* UsernameCell.swift */; };
@@ -133,6 +131,8 @@
 		CE2E628321A94E3A00BF46B8 /* UsernameToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E626B21A8EE7F00BF46B8 /* UsernameToolbarView.swift */; };
 		CE2E628521A9CEF800BF46B8 /* SoundKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E628421A9CEF800BF46B8 /* SoundKit.swift */; };
 		CE2E628621A9D01000BF46B8 /* SoundKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E628421A9CEF800BF46B8 /* SoundKit.swift */; };
+		CE2E628821A9E0E000BF46B8 /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2E628721A9E0E000BF46B8 /* GoogleService-Info-Dev.plist */; };
+		CE2E628A21A9E24200BF46B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2E628921A9E24200BF46B8 /* GoogleService-Info.plist */; };
 		CE72D63C213F4250000A5397 /* WalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72D63B213F4250000A5397 /* WalletController.swift */; };
 		CE72D63E213F426A000A5397 /* WalletHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72D63D213F426A000A5397 /* WalletHeader.swift */; };
 		CE72D640213F4677000A5397 /* WalletService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72D63F213F4677000A5397 /* WalletService.swift */; };
@@ -216,7 +216,6 @@
 		CE218CEE2118C30C00AD1EF2 /* BlockedUsersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUsersController.swift; sourceTree = "<group>"; };
 		CE218CF02118C33600AD1EF2 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		CE218CF22118C63400AD1EF2 /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
-		CE218CFA211BCF8400AD1EF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE218CFC211BDC4B00AD1EF2 /* UsersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersController.swift; sourceTree = "<group>"; };
 		CE2E61A3219FA0E200BF46B8 /* DrawerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
 		CE2E61A521A0B72F00BF46B8 /* Like+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Like+CoreDataClass.swift"; path = "/Users/Hello/Desktop/Projects/Chatter/Keyword/Model/Like+CoreDataClass.swift"; sourceTree = "<absolute>"; };
@@ -234,6 +233,8 @@
 		CE2E627D21A9455400BF46B8 /* pay.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = pay.m4a; sourceTree = "<group>"; };
 		CE2E628021A945ED00BF46B8 /* select01.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = select01.m4a; sourceTree = "<group>"; };
 		CE2E628421A9CEF800BF46B8 /* SoundKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundKit.swift; sourceTree = "<group>"; };
+		CE2E628721A9E0E000BF46B8 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
+		CE2E628921A9E24200BF46B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE72D63B213F4250000A5397 /* WalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletController.swift; sourceTree = "<group>"; };
 		CE72D63D213F426A000A5397 /* WalletHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeader.swift; sourceTree = "<group>"; };
 		CE72D63F213F4677000A5397 /* WalletService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletService.swift; sourceTree = "<group>"; };
@@ -489,7 +490,8 @@
 				CEEBB93F210BF829007E87EE /* LaunchScreen.storyboard */,
 				CEEBB93A210BF827007E87EE /* Sparrow.xcdatamodeld */,
 				CE16B165212013240047E903 /* Info.plist */,
-				CE218CFA211BCF8400AD1EF2 /* GoogleService-Info.plist */,
+				CE2E628721A9E0E000BF46B8 /* GoogleService-Info-Dev.plist */,
+				CE2E628921A9E24200BF46B8 /* GoogleService-Info.plist */,
 			);
 			path = Keyword;
 			sourceTree = "<group>";
@@ -575,6 +577,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE2E626021A8C54900BF46B8 /* LaunchScreen.storyboard in Resources */,
+				CE2E628821A9E0E000BF46B8 /* GoogleService-Info-Dev.plist in Resources */,
 				CE2E627F21A9455400BF46B8 /* pay.m4a in Resources */,
 				CE2E628221A945ED00BF46B8 /* select01.m4a in Resources */,
 				CE2E627621A9453100BF46B8 /* tab01.m4a in Resources */,
@@ -582,7 +585,6 @@
 				CE2E626121A8C54900BF46B8 /* Assets.xcassets in Resources */,
 				CE2E627821A9453100BF46B8 /* thud.m4a in Resources */,
 				CE2E627C21A9453100BF46B8 /* tab03.m4a in Resources */,
-				CE2E626221A8C54900BF46B8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,13 +594,13 @@
 			files = (
 				CEEBB941210BF829007E87EE /* LaunchScreen.storyboard in Resources */,
 				CE2E627E21A9455400BF46B8 /* pay.m4a in Resources */,
+				CE2E628A21A9E24200BF46B8 /* GoogleService-Info.plist in Resources */,
 				CE2E628121A945ED00BF46B8 /* select01.m4a in Resources */,
 				CE2E627521A9453100BF46B8 /* tab01.m4a in Resources */,
 				CE2E627921A9453100BF46B8 /* tab02.m4a in Resources */,
 				CEEBB93E210BF829007E87EE /* Assets.xcassets in Resources */,
 				CE2E627721A9453100BF46B8 /* thud.m4a in Resources */,
 				CE2E627B21A9453100BF46B8 /* tab03.m4a in Resources */,
-				CE218CFB211BCF8400AD1EF2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,16 +12,18 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var dev: Bool = false
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        FirebaseApp.configure()
+        let options = FirebaseOptions(contentsOfFile: googlePList)
+        FirebaseApp.configure(options: options!)
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.layer.cornerRadius = 8
         window?.clipsToBounds = true
+        
         let tabBar = TabBar()
         window?.rootViewController = tabBar
         

@@ -58,7 +58,7 @@ class WalletHeaderView: UIView {
         label.textAlignment = .right
         label.textColor = .black
         label.font = Theme.bold(24)
-        label.text = "0.000"
+        label.text = "Create a Wallet"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

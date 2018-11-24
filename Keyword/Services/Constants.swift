@@ -11,8 +11,10 @@ import Foundation
 
 #if DEV
     let baseUrl = "https://mention.bubbleapps.io/version-test/api/1.1/wf"
+    let googlePList = Bundle.main.path(forResource: "GoogleService-Info-Dev", ofType: "plist")!
 #else
     let baseUrl = "https://keyword.im/api/1.1/wf"
+    let googlePList = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")!
 #endif
 
 public struct HorizonServer {
