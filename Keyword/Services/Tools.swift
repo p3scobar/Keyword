@@ -182,7 +182,7 @@ extension NSMutableAttributedString {
     }
     
     @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
-        let attrs: [NSAttributedStringKey: Any] = [.font: Theme.regular(18), .foregroundColor: Theme.gray]
+        let attrs: [NSAttributedStringKey: Any] = [.font: Theme.regular(18), .foregroundColor: Theme.white]
         let normal = NSAttributedString(string: text, attributes: attrs)
         append(normal)
         return self

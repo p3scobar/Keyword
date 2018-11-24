@@ -16,7 +16,7 @@ class ActivityController: UITableViewController, UISearchControllerDelegate, UIN
     private let activityCell = "activityCell"
     private let refresh = UIRefreshControl()
     
-    var tabBarIndex: Int = 2
+//    var tabBarIndex: Int = 2
     var scrollEnabled: Bool = false
     
     var notifications = [Activity]() {
@@ -43,7 +43,7 @@ class ActivityController: UITableViewController, UISearchControllerDelegate, UIN
     }
     
     func scrollToTop() {
-        if tabBarIndex == 2 && scrollEnabled && notifications.count > 0 {
+        if scrollEnabled && notifications.count > 0 {
             let indexPath = IndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
@@ -65,7 +65,6 @@ class ActivityController: UITableViewController, UISearchControllerDelegate, UIN
     override func viewDidAppear(_ animated: Bool) {
         scrollEnabled = true
         tableView.refreshControl = refresh
-        refresh.tintColor = .white
         refresh.addTarget(self, action: #selector(fetchData), for: .valueChanged)
     }
     

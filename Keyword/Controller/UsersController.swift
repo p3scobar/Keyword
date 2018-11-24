@@ -48,16 +48,16 @@ class UsersController: UITableViewController, UISearchControllerDelegate, UINavi
         navigationController?.navigationBar.prefersLargeTitles = true
         
         self.definesPresentationContext = true
-        let vc = SwipeController()
+        //let vc = SwipeController()
         
-        searchController = UISearchController(searchResultsController: vc)
-        searchController.delegate = self
-        searchController.hidesNavigationBarDuringPresentation = true
-        searchController.dimsBackgroundDuringPresentation = true
-        searchController.searchBar.tintColor = Theme.gray
+//        searchController = UISearchController(searchResultsController: vc)
+//        searchController.delegate = self
+//        searchController.hidesNavigationBarDuringPresentation = true
+//        searchController.dimsBackgroundDuringPresentation = true
+//        searchController.searchBar.tintColor = Theme.gray
         
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
+//        navigationItem.searchController = searchController
+//        navigationItem.hidesSearchBarWhenScrolling = false
         
         fetchData()
     }

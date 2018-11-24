@@ -77,17 +77,18 @@ class TabBar: UITabBarController, UITabBarControllerDelegate {
 
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         guard let items = tabBar.items else { return }
-        
+        if Model.shared.soundsEnabled == true {
+            SoundKit.playSound(type: .tab)
+        }
+            
         if item == items[0] {
             timelineVC.scrollToTop()
         }
         if item == items[1] {
             discoverVC.scrollToTop()
         }
-        if item == items[2] {
-            activityVC.scrollToTop()
-        }
         if item == items[3] {
+            activityVC.scrollToTop()
             checkForNotifications()
         }
     }

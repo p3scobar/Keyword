@@ -29,7 +29,6 @@ class TimelineController: CoreDataTableViewController, UISearchControllerDelegat
         }
     }
     
-    var tabBarIndex: Int = 0
     var scrollEnabled: Bool = false
     
     override func viewDidLoad() {
@@ -76,7 +75,6 @@ class TimelineController: CoreDataTableViewController, UISearchControllerDelegat
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
         scrollEnabled = true
     }
     
@@ -86,7 +84,7 @@ class TimelineController: CoreDataTableViewController, UISearchControllerDelegat
     }
     
     func scrollToTop() {
-        if tabBarIndex == 0 && scrollEnabled && timeline.count > 0 {
+        if scrollEnabled && timeline.count > 0 {
             let indexPath = IndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }

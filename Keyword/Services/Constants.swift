@@ -12,7 +12,7 @@ import Foundation
 #if DEV
     let baseUrl = "https://mention.bubbleapps.io/version-test/api/1.1/wf"
 #else
-    let baseUrl = "https://mention.bubbleapps.io/version-test/api/1.1/wf"
+    let baseUrl = "https://keyword.im/api/1.1/wf"
 #endif
 
 public struct HorizonServer {

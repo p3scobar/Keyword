@@ -52,7 +52,7 @@ class AccountHeader: UIView {
     
     let profileImage: UIImageView = {
         let view = UIImageView()
-        view.contentMode = .scaleAspectFill
+        view.contentMode = .scaleAspectFit
         view.layer.borderWidth = 0
         view.layer.cornerRadius = 54
         view.layer.masksToBounds = true

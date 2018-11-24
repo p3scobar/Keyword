@@ -98,7 +98,7 @@ class ActivityCell: UITableViewCell {
         label.font = Theme.medium(18)
         label.numberOfLines = 2
         label.lineBreakMode = .byTruncatingTail
-        label.textColor = Theme.white
+        label.textColor = Theme.gray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -111,21 +111,13 @@ class ActivityCell: UITableViewCell {
         return view
     }()
     
-//    lazy var unreadView: UIView = {
-//        let view = UIView()
-//        view.backgroundColor = Theme.highlight
-//        view.isHidden = true
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        return view
-//    }()
-    
+
     
     func setupView() {
         selectionStyle = .none
         addSubview(profileImage)
         addSubview(nameLabel)
         addSubview(statusLabel)
-//        addSubview(unreadView)
         
         nameLabel.leftAnchor.constraint(equalTo: profileImage.rightAnchor, constant: 12).isActive = true
         nameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -12).isActive = true

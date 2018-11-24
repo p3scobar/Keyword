@@ -39,7 +39,6 @@ class DiscoverController: CoreDataTableViewController, UISearchBarDelegate, UINa
         }
     }
     
-    var tabBarIndex: Int = 1
     var scrollEnabled: Bool = false
 
     override func viewDidLoad() {
@@ -116,7 +115,7 @@ class DiscoverController: CoreDataTableViewController, UISearchBarDelegate, UINa
 
     
     func scrollToTop() {
-        if tabBarIndex == 1 && scrollEnabled && timeline.count > 0 {
+        if scrollEnabled && timeline.count > 0 {
             let indexPath = IndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
@@ -134,6 +133,7 @@ class DiscoverController: CoreDataTableViewController, UISearchBarDelegate, UINa
         NewsService.discover(cursor: 0) { [weak self] (feed, users) in
             self?.timeline = feed
             self?.users = users
+            self?.spinner.stopAnimating()
         }
     }
 

@@ -134,6 +134,7 @@ struct UserService {
             Model.shared.username = user.username ?? ""
             Model.shared.bio = user.bio ?? ""
             KeychainHelper.mnemonic = Wallet.generate12WordMnemonic()
+            Model.shared.soundsEnabled = true
             completion(true)
         }
     }

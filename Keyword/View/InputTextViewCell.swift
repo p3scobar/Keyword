@@ -32,6 +32,7 @@ class InputTextViewCell: UITableViewCell, UITextViewDelegate {
         view.placeholderColor = Theme.gray
         view.textColor = .white
         view.backgroundColor = Theme.cellBackground
+        view.keyboardAppearance = .dark
         view.contentInset = UIEdgeInsetsMake(8, 0, 0, 0)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

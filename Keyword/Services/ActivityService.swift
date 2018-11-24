@@ -19,17 +19,18 @@ struct ActivityService {
             let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
             let params: Parameters = [:]
             var notifications = [Activity]()
-            notifications = Activity.fetchAll(in: PersistenceService.context)
+            //notifications = Activity.fetchAll(in: PersistenceService.context)
             Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
                 guard let json = response.result.value as? [String:Any],
                     let resp = json["response"] as? [String:Any],
                     let results = resp["activity"] as? [[String:Any]] else { return }
-            
+                
                 results.forEach({ (data) in
-                    let id = data["_id"] as? String ?? ""
-                    let activity = Activity.findOrCreateActivity(id: id, data: data, in: PersistenceService.context)
-                    if !notifications.contains(activity) {
-                        notifications.append(activity)
+                    if let id = data["_id"] as? String {
+                        let activity = Activity.findOrCreateActivity(id: id, data: data, in: PersistenceService.context)
+                        if !notifications.contains(activity) {
+                            notifications.append(activity)
+                        }
                     }
                 })
                 let sorted = notifications.sorted(by: { (s0, s1) -> Bool in
