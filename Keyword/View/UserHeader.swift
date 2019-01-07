@@ -55,13 +55,7 @@ class UserHeader: UIView {
             if let bio = user?.bio {
                 bioLabel.text = bio
             }
-            if user?.publicKey != nil {
-                payButton.isEnabled = true
-                payButton.isHidden = false
-            } else {
-                payButton.isEnabled = false
-                payButton.isHidden = true
-            }
+            checkIfUserHasPublicKey()
             if isCurrentUser {
                 followButton.isHidden = true
                 payButton.isHidden = true
@@ -69,6 +63,18 @@ class UserHeader: UIView {
                 followButton.isHidden = false
                 payButton.isHidden = false
             }
+        }
+    }
+    
+    func checkIfUserHasPublicKey() {
+        if user?.publicKey != nil, user?.publicKey != "" {
+            payButton.isEnabled = true
+            payButton.isHidden = false
+            payButton.layer.borderColor = Theme.highlight.cgColor
+        } else {
+            payButton.isEnabled = false
+            payButton.isHidden = true
+            payButton.layer.borderColor = Theme.highlight.withAlphaComponent(0.3).cgColor
         }
     }
     
@@ -128,6 +134,7 @@ class UserHeader: UIView {
         let button = UIButton()
         button.setTitle("Pay", for: .normal)
         button.setTitleColor(Theme.highlight, for: .normal)
+        button.setTitleColor(Theme.highlight.withAlphaComponent(0.3), for: .disabled)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.layer.cornerRadius = 18
         button.layer.borderWidth = 2

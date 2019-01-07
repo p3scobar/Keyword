@@ -21,11 +21,15 @@ struct NewsService {
             let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
             let params: [String:Any] = ["sort_field":"timestamp","descending":false, "cursor":cursor]
             Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
+                print(response)
                 var feed = [Status]()
                 var users = [User]()
                 guard let json = response.result.value as? [String:Any],
                     let resp = json["response"] as? [String:Any],
-                    let posts = resp["posts"] as? [[String:Any]] else { return }
+                    let posts = resp["posts"] as? [[String:Any]] else {
+                        completion([],[])
+                        return
+                }
                 posts.forEach({ (postData) in
                     let id = postData["_id"] as? String ?? ""
                     let status = Status.findOrCreateStatus(id: id, data: postData, in: PersistenceService.context)

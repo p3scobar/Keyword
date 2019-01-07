@@ -91,14 +91,15 @@ class DiscoverController: CoreDataTableViewController, UISearchBarDelegate, UINa
     
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.prefersLargeTitles = false
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         scrollEnabled = false
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationController?.navigationBar.shadowImage = nil
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.shadowImage = nil
+        refresh.endRefreshing()
     }
     
     @objc func handleCompose() {

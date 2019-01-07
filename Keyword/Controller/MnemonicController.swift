@@ -87,27 +87,8 @@ class MnemonicController: UITableViewController {
     }
     
     @objc func handleContinue() {
-        DispatchQueue.global(qos: .background).async {
-            WalletService.generateKeyPair(mnemonic: self.mnemonic) { (keyPair) in
-                let publicKey = keyPair.accountId
-                guard let privateSeed = keyPair.secretSeed else { return }
-                
-                KeychainHelper.mnemonic = self.mnemonic
-                KeychainHelper.publicKey = publicKey
-                KeychainHelper.privateSeed = privateSeed
-                
-                UserService.updatePublicKey(pk: publicKey, completion: { (_) in })
-                
-                
-                WalletService.createStellarTestAccount(accountID: publicKey, completion: { (response) in
-                    DispatchQueue.main.async {
-                        self.dismiss(animated: true, completion: {
-                            self.controller?.loadData(nil)
-                        })
-                    }
-                })
-            }
-        }
+        let vc = PendingController(mnemonic: mnemonic)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     

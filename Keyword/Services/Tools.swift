@@ -122,12 +122,13 @@ extension Status {
         if self.link != nil {
             height += 240
         }
-        if self.inReplyToId != nil, withReply == true, let replyText = self.inReplyToText {
-            let replyHeight = replyText.height(forWidth: UIScreen.main.bounds.width-124, font: Theme.medium(18))+60
-            height += (replyHeight <= 160) ? replyHeight : 170
-        }
         return height
     }
+    
+//    if self.inReplyToId != nil, withReply == true, let replyText = self.inReplyToText {
+//        let replyHeight = replyText.height(forWidth: UIScreen.main.bounds.width-124, font: Theme.medium(18))+60
+//        height += (replyHeight <= 160) ? replyHeight : 170
+//    }
     
     
     func heightLarge() -> CGFloat {

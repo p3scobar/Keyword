@@ -9,8 +9,6 @@
 
 import Foundation
 import UIKit
-//import MaterialActivityIndicator
-//import SwiftySound
 
 class ConfirmPaymentController: UITableViewController {
     

@@ -8,7 +8,6 @@
 
 import Foundation
 import stellarsdk
-//import Firebase
 import Alamofire
 
 struct WalletService {
@@ -51,9 +50,6 @@ struct WalletService {
             case .success(let accountDetails):
                 accountDetails.balances.forEach({ (balance) in
                     if balance.assetCode == "KEY" {
-                        print("Issuer: \(balance.assetIssuer)")
-                        print("Asset: \(balance.assetCode)")
-                        print("Balance: \(balance.balance)")
                         completion(balance.balance)
                     }
                 })

@@ -43,7 +43,7 @@ class LoginController: UITableViewController, InputTextCellDelegate {
         UserService.login(email: email, password: password) { (success, message) in
             if success {
                 self.dismiss(animated: true, completion: nil)
-                NotificationCenter.default.post(name: Notification.Name("login"), object: nil, userInfo: nil)
+                NotificationCenter.default.post(name: Notification.Name("reload"), object: nil, userInfo: nil)
             } else {
                 self.presentAlert(title: "Error", message: message ?? "")
             }

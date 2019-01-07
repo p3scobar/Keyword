@@ -57,6 +57,8 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        loadData(nil)
+        
         let publicKey = KeychainHelper.publicKey
         let privateSeed = KeychainHelper.privateSeed
         
@@ -91,12 +93,7 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
             self.tableView.backgroundView = nil
         }
     }
-    
-//    func fetchTransactions() {
-//        WalletService.fetchTransactions { (payments) in
-//            self.payments = payments
-//        }
-//    }
+
     
     func streamTransactions() {
         WalletService.streamPayments { (payment) in
@@ -115,11 +112,6 @@ class WalletController: UITableViewController, WalletHeaderDelegate {
     }
     
     @objc func loadData(_ sender: UIRefreshControl?) {
-        if sender != nil, Model.shared.soundsEnabled {
-            DispatchQueue.main.async {
-                //Sound.play(file: "expand.m4a")
-            }
-        }
         if KeychainHelper.publicKey != "" {
             getAccountDetails()
         }

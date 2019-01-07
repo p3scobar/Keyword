@@ -227,6 +227,7 @@ class StatusController: UITableViewController, UINavigationBarDelegate, StatusCe
             NewsService.deletePost(postId: postId, completion: { (success) in
                 if success == true {
                     self.navigationController?.popViewController(animated: true)
+                    NotificationCenter.default.post(name: Notification.Name("reload"), object: nil, userInfo: nil)
                 }
             })
         }

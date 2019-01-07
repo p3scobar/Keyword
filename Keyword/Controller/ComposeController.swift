@@ -182,7 +182,7 @@ class ComposeController: UIViewController, ComposeDelegate, UIImagePickerControl
     }
     
     @objc func handleCancel() {
-        view.endEditing(true)
+        inputTextView.textView.resignFirstResponder()
         dismiss(animated: true, completion: nil)
     }
     

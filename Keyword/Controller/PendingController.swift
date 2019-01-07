@@ -17,12 +17,42 @@ class PendingController: UIViewController {
         setupView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     let indicator: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        let view = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.color = Theme.lightGray
         return view
     }()
+    
+    convenience init(mnemonic: String) {
+        self.init()
+        DispatchQueue.global(qos: .background).async {
+            WalletService.generateKeyPair(mnemonic: mnemonic) { (keyPair) in
+                let publicKey = keyPair.accountId
+                guard let privateSeed = keyPair.secretSeed else { return }
+                KeychainHelper.publicKey = publicKey
+                KeychainHelper.privateSeed = privateSeed
+                
+                UserService.updatePublicKey(pk: publicKey, completion: { (_) in })
+                
+                WalletService.createStellarTestAccount(accountID: publicKey, completion: { (response) in
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                })
+            }
+        }
+    }
     
     convenience init(accountId: String, username: String, amount: Decimal) {
         self.init()

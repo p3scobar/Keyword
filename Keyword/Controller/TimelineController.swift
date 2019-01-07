@@ -52,7 +52,7 @@ class TimelineController: CoreDataTableViewController, UISearchControllerDelegat
         plus.tintColor = Theme.highlight
         self.navigationItem.rightBarButtonItem = plus
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleLogin(notification:)), name: Notification.Name("login"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLogin(notification:)), name: Notification.Name("reload"), object: nil)
         tableView.refreshControl = refresh
         refresh.addTarget(self, action: #selector(fetchData(_:)), for: .valueChanged)
         extendedLayoutIncludesOpaqueBars = true

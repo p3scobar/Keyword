@@ -98,7 +98,7 @@ class AccountHeader: UIView {
         button.setTitleColor(Theme.highlight, for: .normal)
         button.backgroundColor = .clear
         button.layer.borderColor = Theme.highlight.cgColor
-        button.layer.borderWidth = 2
+        button.layer.borderWidth = 1
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.layer.cornerRadius = 18
         button.translatesAutoresizingMaskIntoConstraints = false
